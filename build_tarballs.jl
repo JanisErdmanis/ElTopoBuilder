@@ -2,7 +2,7 @@
 # `julia build_tarballs.jl --help` to see a usage message.
 using BinaryBuilder
 
-name = "ElTopoBuilderV2"
+name = "ElTopoBuilder"
 version = v"0.1.0"
 
 # Collection of sources required to build ElTopoBuilderV2
