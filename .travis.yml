@@ -1,0 +1,39 @@
+language: julia
+os:
+  - linux
+julia:
+  - 1.0
+notifications:
+  email: false
+git:
+  depth: 99999999
+cache:
+  timeout: 1000
+  directories:
+    - downloads
+env:
+  global:
+    - BINARYBUILDER_DOWNLOADS_CACHE=downloads
+    - BINARYBUILDER_AUTOMATIC_APPLE=false
+sudo: required
+
+# Before anything else, get the latest versions of things
+before_script:
+  - julia -e 'using Pkg; pkg"add BinaryProvider"; pkg"add BinaryBuilder#master"; Pkg.build()'
+
+script:
+  - julia build_tarballs.jl
+
+
+deploy:
+    provider: releases
+    api_key:
+        # Note; this api_key is only valid for akels/ElTopoBuilderV2; you need
+        # to make your own: https://docs.travis-ci.com/user/deployment/releases/
+        secure: ERkTxrtWZTH8GBQYPu1hvWFVF0hBrd6uxPS/vc8lM0OZqWOkCqk6+FOm/9UKbOXg+XUIamJ1lC/JC1+BsdNVpq6vtMHJuhsf2LXuvCHUQ4q5cMZdIvqx9Oe7oCMSdmJbmOZV0p/0vtwQN+GeLWXbJ3vcwa3+tBoCR4bIpARQAjHVoJyyfqnoLij/ghbU3yxj20JVGqC3T3H+LogQbjjDB+UVSXbKopwxbr7NZsyOP7dBXcNSoJkH/BfT8ORxOBUj/I2hXd6lApulhAilf1uqttPjdL9pqO/bY9EVGbmxSdnDmmZQsGaw+ePIdlmkvsGERRt9yFij4byd+q25aJsqwDDBubFvs+KGUeLJnINSjHld98pRALmy2ApCOlBAxyeG3cb3Qn4I4ysFLT7ftvqivH9TMQRhikFP6hSlcLjHqSdz+d8kFQ+Viaq3OcoQUjbRE7dXlAMyhQYc9Xn1fhEmxDyBXFgf3BSy1OwzUqPIFzC/swrC7R0EhPQ53WAAPB7URdPMOOb0ss5Fep9mj3xtvzeuEq6m1ri4W6//hml6yPW8D7hxW5CRJSjGdzGVaz8MEK0ngHDuRChW3ma+v9BQmlm+2Ij8vqDEG6YYsVXWbxLc0ylOiXIt2p81ND7uGfS3qpix1hTGM+Ho+Kv9Q6h2IWUgqOdc5XWfRd4tFPs5rF8=
+    file_glob: true
+    file: products/*
+    skip_cleanup: true
+    on:
+        repo: akels/ElTopoBuilderV2
+        tags: true
