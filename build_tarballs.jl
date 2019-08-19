@@ -40,6 +40,7 @@ exit
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
 platforms = [
+    Windows(:x86_64),
     Linux(:x86_64, libc=:glibc)
 ]
 
@@ -54,5 +55,6 @@ dependencies = [
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
+# platforms = expand_gcc_versions(platforms)
 build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies)
 
