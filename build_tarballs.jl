@@ -34,7 +34,7 @@ cd $WORKSPACE
 
 
 if [ $target = "x86_64-w64-mingw32" ] || [ $target = "i686-w64-mingw32" ]; then
-g++ srcdir/eltopo/eltopo3d/obj/*.o destdir/lib/libopenblas.a -o destdir/lib/eltopo.dll -fPIC -shared -lm -static-libgfortran -static-libstdc++
+g++ srcdir/eltopo/eltopo3d/obj/*.o destdir/lib/libopenblas.a -o destdir/lib/eltopo.dll -fPIC -shared -lm -static-libgfortran -static-libstdc++ -fno-exceptions
 else
 g++ srcdir/eltopo/eltopo3d/obj/*.o destdir/lib/libopenblas.a -o destdir/lib/eltopo.so -fPIC -shared -lm -static-libgfortran -static-libstdc++
 fi
