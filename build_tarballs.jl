@@ -34,11 +34,12 @@ cd $WORKSPACE
 
 
 if [ $target = "x86_64-w64-mingw32" ] || [ $target = "i686-w64-mingw32" ]; then
-g++ srcdir/eltopo/eltopo3d/obj/*.o destdir/lib/libopenblas.a -o destdir/lib/eltopo.dll -fPIC -shared -lstdc++ -lm -lgfortran
+g++ srcdir/eltopo/eltopo3d/obj/*.o destdir/lib/libopenblas.a -o destdir/lib/eltopo.dll -fPIC -shared -lstdc++ -lm -static-libgfortran
 else
-g++ srcdir/eltopo/eltopo3d/obj/*.o destdir/lib/libopenblas.a -o destdir/lib/eltopo.so -fPIC -shared -lstdc++ -lm -lgfortran
+g++ srcdir/eltopo/eltopo3d/obj/*.o destdir/lib/libopenblas.a -o destdir/lib/eltopo.so -fPIC -shared -lstdc++ -lm -static-libgfortran
 fi
 """
+# -Wl,-Bstatic -lgfortran
 
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
