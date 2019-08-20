@@ -3,7 +3,7 @@
 using BinaryBuilder
 
 name = "ElTopoBuilder"
-version = v"0.1.2"
+version = v"0.1.3"
 
 # Collection of sources required to build ElTopoBuilder
 sources = [
@@ -34,9 +34,9 @@ cd $WORKSPACE
 
 
 if [ $target = "x86_64-w64-mingw32" ] || [ $target = "i686-w64-mingw32" ]; then
-g++ srcdir/eltopo/eltopo3d/obj/*.o destdir/lib/libopenblas.a -o destdir/lib/eltopo.dll -fPIC -shared -lstdc++ -lm -static-libgfortran
+g++ srcdir/eltopo/eltopo3d/obj/*.o destdir/lib/libopenblas.a -o destdir/lib/eltopo.dll -fPIC -shared -lm -static-libgfortran -static-libstdc++
 else
-g++ srcdir/eltopo/eltopo3d/obj/*.o destdir/lib/libopenblas.a -o destdir/lib/eltopo.so -fPIC -shared -lstdc++ -lm -static-libgfortran
+g++ srcdir/eltopo/eltopo3d/obj/*.o destdir/lib/libopenblas.a -o destdir/lib/eltopo.so -fPIC -shared -lm -static-libgfortran -static-libstdc++
 fi
 """
 # -Wl,-Bstatic -lgfortran
